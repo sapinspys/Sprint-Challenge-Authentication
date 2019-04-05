@@ -1,22 +1,37 @@
 .App {
-  text-align: center;
+  color: white;
 }
 
 .App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
+  animation: App-logo-spin infinite 50s linear;
+  height: 10vmin;
   pointer-events: none;
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+  font-size: 2rem;
+  color: #61dafb;
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.App-header button {
+    padding: 5px 18px;
+    font-weight: bold;
+    font-size: 1rem;
+    margin-left: 50px;
+    border-radius: 5px;
+    background: lightgray;
+    color: black;
+    border: none;
+    box-shadow: 4px 4px 0 gray;
+    transition: 0.15s;
+}
+
+.App-header button:hover {
+  transform: scale(1.05)
 }
 
 .App-link {
