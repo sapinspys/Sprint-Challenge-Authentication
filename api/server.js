@@ -6,9 +6,9 @@ const configureRoutes = require('../config/routes.js');
 
 const server = express();
 
+server.use(express.json());
 server.use(helmet());
 server.use(cors());
-server.use(express.json());
 
 server.use(function(req, res, next) {
   console.log(`[${new Date().toISOString()}] ${req.method} to ${req.url}`);
