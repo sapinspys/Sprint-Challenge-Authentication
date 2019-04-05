@@ -63,14 +63,10 @@ export class LoginForm extends React.Component {
         console.log(error.response.data.message)
 
         this.setState({
-          error: error.response.data.message
+          error: error.response.data.message,
+          password: ""
         });
       })
-
-    
-    this.setState({
-      password: ""
-    });
   }
 }
 

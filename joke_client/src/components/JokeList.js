@@ -7,16 +7,16 @@ import styled from 'styled-components'
 
 class JokeList extends React.Component {
   state ={
-    users: [],
+    jokes: [],
   }
 
   render() {
     return (
       <ListContainer>
-        <h2>List of Users</h2>
+        <h2>Dad Jokes</h2>
         <ul>
-          {this.state.users.map((user,index) => (
-            <li key={index}>{user.username}, <b>{user.department}</b></li>
+          {this.state.jokes.map((joke,index) => (
+            <li key={index}>{joke.joke}</li>
           ))}
         </ul>
       </ListContainer>
@@ -25,9 +25,9 @@ class JokeList extends React.Component {
 
   componentDidMount() {
     Axios
-      .get('/users')
+      .get('/jokes')
       .then(res => {
-        this.setState({ users: res.data })
+        this.setState({ jokes: res.data })
       })
       .catch(error => {
         console.log(error)
