@@ -17,10 +17,11 @@ function findBy(filter) {
     .first();
 }
 
-async function add(user) {
-  const [id] = await db("users").insert(user);
+function add(user) {
+  // const [id] =
+  return db("users").insert(user);
 
-  return findById(id);
+  // return findById(id);
 }
 
 function findById(id) {
