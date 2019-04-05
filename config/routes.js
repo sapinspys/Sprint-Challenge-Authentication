@@ -14,16 +14,21 @@ module.exports = server => {
 const URL = "https://localhost:3300";
 
 function register(req, res) {
-  const [username, password] = req.body;
+  let { username, password } = req.body;
 
   if (username && password) {
+    const hash = bcrypt.hashSync(password, 14);
+    password = hash;
+
+    Users.add({ username, password });
+
     axios
       .post(URL)
       .then(response => {
         res.status(201).json(response);
       })
       .catch(err => {
-        res.status(500).json({ message: "Error Fetching Jokes", error: err });
+        res.status(500).json({ message: "Failed to create a new account", error: err });
       });
   } else {
     res.status(400).json({
