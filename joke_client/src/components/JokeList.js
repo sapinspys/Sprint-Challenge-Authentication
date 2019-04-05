@@ -5,7 +5,7 @@ import requiresAuth from '../auth/requiresAuth.js'
 
 import styled from 'styled-components'
 
-class Home extends React.Component {
+class JokeList extends React.Component {
   state ={
     users: [],
   }
@@ -56,4 +56,4 @@ const ListContainer = styled.div`
   }
 `;
 
-export default requiresAuth(Home);
+export default requiresAuth(JokeList);

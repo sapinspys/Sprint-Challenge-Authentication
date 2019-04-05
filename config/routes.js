@@ -64,11 +64,7 @@ function login(req, res) {
         }
       })
       .catch(error => {
-        if (error.errno === 19) {
-          res.status(400).json({
-            message: "Username already exists"
-          });
-        } res.status(500).json(error);
+        res.status(500).json(error);
       });
   } else {
     res.status(400).json({

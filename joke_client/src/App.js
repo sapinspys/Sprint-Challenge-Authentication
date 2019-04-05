@@ -6,7 +6,7 @@ import './App.css';
 
 import LoginForm from './components/LoginForm.js'
 import RegistrationForm from './components/RegistrationForm.js'
-import Home from './components/Home.js'
+import JokeList from './components/JokeList.js'
 
 
 class App extends Component {
@@ -15,7 +15,7 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <Link className='App-link' to="/">Home</Link>
+          <Link className='App-link' to="/">Jokes</Link>
           &nbsp;&#124;&nbsp;
           <Link className='App-link' to="/login">Login</Link>
           &nbsp;&#124;&nbsp;
@@ -24,7 +24,7 @@ class App extends Component {
         </header>
         
         <>
-          <PrivateRoute exact path='/' component={Home} />
+          <PrivateRoute exact path='/' component={JokeList} />
           <Route path='/login' component={LoginForm} />
           <Route path='/register' component={RegistrationForm} />
         </>

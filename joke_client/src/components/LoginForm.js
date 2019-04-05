@@ -52,7 +52,7 @@ export class LoginForm extends React.Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    axios.put('http://localhost:5000/api/auth/login', this.state)
+    axios.put(`/login`, this.state)
       .then(res => {
         alert('Login successful!')
         localStorage.setItem('token', res.data.token);
@@ -61,9 +61,6 @@ export class LoginForm extends React.Component {
       .catch(error => {
         console.log(error)
         alert('Something went wrong, please try again')
-        // this.setState({
-        //   error: error
-        // });
       })
 
     

@@ -4,6 +4,8 @@ import { withRouter } from "react-router-dom";
 
 import styled from "styled-components";
 
+import { API_URL } from '../API_URL.js'
+
 export class LoginForm extends React.Component {
   state = {
     username: "",
@@ -60,7 +62,7 @@ export class LoginForm extends React.Component {
   handleSubmit = event => {
     event.preventDefault();
     axios
-      .post("http://localhost:5000/api/auth/register", this.state)
+      .post(`${API_URL}/register`, this.state)
       .then(res => {
         alert("Registration successful, please log in");
         console.log(res.data.message);
