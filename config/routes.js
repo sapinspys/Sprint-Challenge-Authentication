@@ -14,8 +14,6 @@ module.exports = server => {
   server.get("/api/jokes", authenticate, getJokes);
 };
 
-const URL = "https://localhost:3300";
-
 function register(req, res) {
   let { username, password } = req.body;
 
@@ -48,9 +46,6 @@ function login(req, res) {
   let { username, password } = req.body;
 
   if (username && password) {
-    const hash = bcrypt.hashSync(password, 14);
-    password = hash;
-
     db("users")
       .where({ username })
       .first()
@@ -61,6 +56,10 @@ function login(req, res) {
           res.status(200).json({
             message: `Welcome ${user.username}. You are now logged in!`,
             token
+          });
+        } else {
+          res.status(401).json({
+            message: "Incorrect password"
           });
         }
       })
