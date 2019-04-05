@@ -1,6 +1,9 @@
 const axios = require("axios");
 const bcrypt = require("bcryptjs");
+
 const jwt = require("jsonwebtoken");
+const jwtKey =
+  process.env.JWT_SECRET;
 
 const { authenticate } = require("../auth/authenticate");
 const db = require("../database/dbConfig.js");
@@ -53,7 +56,7 @@ function login(req, res) {
       .first()
       .then(user => {
         if (user && bcrypt.compareSync(password, user.password)) {
-          const token = generateToken(foundUser);
+          const token = generateToken(user);
           
           res.status(200).json({
             message: `Welcome ${user.username}. You are now logged in!`,
@@ -88,4 +91,16 @@ function getJokes(req, res) {
     .catch(err => {
       res.status(500).json({ message: "Error Fetching Jokes", error: err });
     });
+}
+
+function generateToken(user) {
+  const payload = {
+    subject: user.id,
+    username: user.username
+  };
+  const options = {
+    expiresIn: "1d"
+  };
+
+  return jwt.sign(payload, jwtKey, options);
 }
