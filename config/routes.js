@@ -24,7 +24,7 @@ function register(req, res) {
       .insert({ username, password })
       .then(id => {
         res.status(201).json({
-          message: "Success!"
+          message: `Success! Welcome user ${id}`,
         });
       })
       .catch(error => {
@@ -42,7 +42,37 @@ function register(req, res) {
 }
 
 function login(req, res) {
-  // implement user login
+  let { username, password } = req.body;
+
+  if (username && password) {
+    const hash = bcrypt.hashSync(password, 14);
+    password = hash;
+
+    db("users")
+      .where({ username })
+      .first()
+      .then(user => {
+        if (user && bcrypt.compareSync(password, user.password)) {
+          const token = generateToken(foundUser);
+          
+          res.status(200).json({
+            message: `Welcome ${user.username}. You are now logged in!`,
+            token
+          });
+        }
+      })
+      .catch(error => {
+        if (error.errno === 19) {
+          res.status(400).json({
+            message: "Username already exists"
+          });
+        } res.status(500).json(error);
+      });
+  } else {
+    res.status(400).json({
+      message: "Please provide username and password"
+    });
+  }
 }
 
 function getJokes(req, res) {
