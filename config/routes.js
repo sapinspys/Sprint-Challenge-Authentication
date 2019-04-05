@@ -33,7 +33,9 @@ function register(req, res) {
           res.status(403).json({
             message: "Username already exists"
           });
-        } res.status(500).json(error);
+        } else {
+          res.status(500).json(error);
+        }
       });
   } else {
     res.status(400).json({
