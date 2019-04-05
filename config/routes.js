@@ -30,7 +30,7 @@ function register(req, res) {
       })
       .catch(error => {
         if (error.errno === 19) {
-          res.status(400).json({
+          res.status(403).json({
             message: "Username already exists"
           });
         } res.status(500).json(error);

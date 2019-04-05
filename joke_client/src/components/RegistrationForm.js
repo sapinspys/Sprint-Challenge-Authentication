@@ -4,13 +4,14 @@ import { withRouter } from "react-router-dom";
 
 import styled from "styled-components";
 
-import { API_URL } from '../API_URL.js'
+// import { API_URL } from '../API_URL.js'
 
 export class LoginForm extends React.Component {
   state = {
     username: "",
     password: "",
-    department: ""
+    department: "",
+    error: ""
   };
 
   render() {
@@ -34,21 +35,12 @@ export class LoginForm extends React.Component {
           value={this.state.password}
         />
 
-        <label htmlFor="department">Department</label>
-        <input
-          onChange={this.handleChange}
-          name="department"
-          type="text"
-          value={this.state.department}
-          className="last-input"
-        />
-
         <button type="submit" className="login-btn">
           Submit
         </button>
 
         <label style={loginError(this.state.error)}>
-          Error: {this.state.error}. Please try again.
+          {this.state.error}
         </label>
       </StyledForm>
     );
@@ -62,17 +54,18 @@ export class LoginForm extends React.Component {
   handleSubmit = event => {
     event.preventDefault();
     axios
-      .post(`${API_URL}/register`, this.state)
+      .post(`/register`, this.state)
       .then(res => {
         alert("Registration successful, please log in");
         console.log(res.data.message);
         this.props.history.push("/login");
       })
       .catch(error => {
-        console.log(error);
-        // this.setState({
-        //   error: error
-        // });
+        console.log(error.response.data.message)
+
+        this.setState({
+          error: error.response.data.message,
+        });
       });
   };
 }
