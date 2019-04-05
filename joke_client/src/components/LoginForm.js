@@ -7,7 +7,8 @@ import styled from 'styled-components'
 export class LoginForm extends React.Component {
   state = {
     username: "",
-    password: ""
+    password: "",
+    error: ""
   };
 
   render() {
@@ -39,7 +40,7 @@ export class LoginForm extends React.Component {
         </button>
 
         <label style={loginError(this.state.error)}>
-          Error: {this.state.error}. Please try again.
+          {this.state.error}
         </label>
       </StyledForm>
     );
@@ -52,15 +53,18 @@ export class LoginForm extends React.Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    axios.put(`/login`, this.state)
+    axios.post(`/login`, this.state)
       .then(res => {
         alert('Login successful!')
         localStorage.setItem('token', res.data.token);
         this.props.history.push('/');
       })
       .catch(error => {
-        console.log(error)
-        alert('Something went wrong, please try again')
+        console.log(error.response.data.message)
+
+        this.setState({
+          error: error.response.data.message
+        });
       })
 
     
