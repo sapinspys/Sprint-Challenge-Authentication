@@ -65,7 +65,7 @@ Follow these steps for completing your project:
 
 Helpful Tip on Testing this Project:
 
-- [ ] **TEST** this project using **`POSTMAN`**.
+- [X] **TEST** this project using **`POSTMAN`**.
 
 ## Minimum Viable Product
 
